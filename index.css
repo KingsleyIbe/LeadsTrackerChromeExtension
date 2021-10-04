@@ -12,14 +12,17 @@ input {
     border: 1px solid #2d09f7;
     margin-bottom: 4px;
 }
-
 button {
     background: #2d09f7;
     color: #fff;
     padding: 10px 20px;
     border: 1px solid #2d09f7;
     font-weight: bold;
-}
+    border-radius: 5px;
+    position: relative;
+    left: 40px;
+    margin: auto;
+} 
 button:hover{
     opacity: 0.3;
 }
@@ -41,6 +44,19 @@ li {
 
 a {
     color: #2d09f7;
+}
+#delete-btn{
+    background-color: #ff0000;
+    border: 0;
+}
+.fas{
+    color: #ff0000;;
+    border: 0;
+    margin-right: 10px;
+    margin-left: 10px;
+}
+.fas:hover{
+    opacity: 0.3;
 }
 a:hover{
     opacity: 0.3;

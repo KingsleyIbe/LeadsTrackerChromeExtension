@@ -1,4 +1,4 @@
-//Varible Declaration and assignment of values.
+// window.addEventListener("loadeddata", () => {
 let myLeads = [];
 const inputEl = document.getElementById("input-el");
 const inputBtn = document.getElementById("input-btn");
@@ -6,6 +6,8 @@ const ulEl = document.getElementById("ul-el");
 const deleteBtn = document.getElementById("delete-btn");
 const leadsFromLocalStorage = JSON.parse(localStorage.getItem("myLeads"));
 const tabBtn = document.getElementById("tab-btn");
+
+
 
 //Add item from the input when saveInput button is clicked.
 inputBtn.addEventListener("click", function () {
@@ -33,22 +35,55 @@ tabBtn.addEventListener("click", function () {
 
 //Render url as a list link
 function render(leads) {
-  let listItems = "";
+let listItems = "";
   for (let i = 0; i < leads.length; i++) {
-    listItems += `
-            <li>
-                <a target='_blank' href='${leads[i]}'>
-                    ${leads[i]}
-                </a>
-            </li>
-        `;
+    if (
+      leads[i].includes("@", 0)
+    || leads[i].includes(".", 0)
+    || leads[i].includes("www.", 0)
+    || leads[i].includes("https", 0)
+    || leads[i].includes("http", 0)
+    || leads[i].includes("/", 0)
+    || leads[i].includes(":", 0)
+    || leads[i].includes("|", 0))
+    {
+      listItems += `
+      <li>
+          <i class="fas fa-trash-alt" id="delete-item"></i>
+          <a target='_blank' href='${leads[i]}'>
+              ${leads[i]}
+          </a>
+          
+      </li>
+  `;
+
+    }else{
+      listItems += `
+      <li>
+          <i class="fas fa-trash-alt" id="delete-item"></i>
+              ${leads[i]} 
+      </li>
+  `;
+
+    }
+     
   }
   ulEl.innerHTML = listItems;
 }
+
+//Delete individual items
+const deleteItem = document.getElementById("delete-item");
+deleteItem.addEventListener("click", function () {
+  myLeads.splice(myLeads, 1);
+  localStorage.setItem("myLeads", JSON.stringify(myLeads));
+  render(myLeads);
+  
+  });
+
 //Delete all saved url when delete button is double clicked.
 deleteBtn.addEventListener("dblclick", function () {
   localStorage.clear();
   myLeads = [];
   render(myLeads);
 });
-
+// });
