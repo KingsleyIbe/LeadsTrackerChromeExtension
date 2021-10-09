@@ -1,4 +1,3 @@
-// window.addEventListener("loadeddata", () => {
 let myLeads = [];
 const inputEl = document.getElementById("input-el");
 const inputBtn = document.getElementById("input-btn");
@@ -7,16 +6,21 @@ const deleteBtn = document.getElementById("delete-btn");
 const leadsFromLocalStorage = JSON.parse(localStorage.getItem("myLeads"));
 const tabBtn = document.getElementById("tab-btn");
 
-
+//Delete individual items
+const deleteItem = (i) => {
+  console.log(i);
+    myLeads.splice(i, 1);
+  localStorage.setItem("myLeads", JSON.stringify(myLeads));
+  render(myLeads);
+}
 
 //Add item from the input when saveInput button is clicked.
 inputBtn.addEventListener("click", function () {
-    myLeads.push(inputEl.value);
-    inputEl.value = "";
-    localStorage.setItem("myLeads", JSON.stringify(myLeads));
-    render(myLeads);
-  });
-  
+  myLeads.push(inputEl.value);
+  inputEl.value = "";
+  localStorage.setItem("myLeads", JSON.stringify(myLeads));
+  render(myLeads);
+});
 
 //Checking if there is item in our array variable.
 if (leadsFromLocalStorage) {
@@ -35,50 +39,42 @@ tabBtn.addEventListener("click", function () {
 
 //Render url as a list link
 function render(leads) {
-let listItems = "";
+  let listItems = "";
   for (let i = 0; i < leads.length; i++) {
     if (
-      leads[i].includes("@", 0)
-    || leads[i].includes(".", 0)
-    || leads[i].includes("www.", 0)
-    || leads[i].includes("https", 0)
-    || leads[i].includes("http", 0)
-    || leads[i].includes("/", 0)
-    || leads[i].includes(":", 0)
-    || leads[i].includes("|", 0))
-    {
+      leads[i].includes("@", 0) ||
+      leads[i].includes(".", 0) ||
+      leads[i].includes("www.", 0) ||
+      leads[i].includes("https", 0) ||
+      leads[i].includes("http", 0) ||
+      leads[i].includes("/", 0) ||
+      leads[i].includes(":", 0) ||
+      leads[i].includes("|", 0)
+    ) {
       listItems += `
       <li>
-          <i class="fas fa-trash-alt" id="delete-item"></i>
+      <button id="delete-item-btn">
+          <i class="fas fa-trash-alt" id="delete-item" onclick="deleteItem('${i}')"></i>
+          </button>
           <a target='_blank' href='${leads[i]}'>
               ${leads[i]}
           </a>
           
       </li>
   `;
-
-    }else{
+    } else {
       listItems += `
       <li>
-          <i class="fas fa-trash-alt" id="delete-item"></i>
+      <button id="delete-item-btn">
+          <i class="fas fa-trash-alt" id="delete-item" onclick="deleteItem('${i}')"></i>
+          </button>
               ${leads[i]} 
       </li>
   `;
-
     }
-     
   }
   ulEl.innerHTML = listItems;
-}
-
-//Delete individual items
-const deleteItem = document.getElementById("delete-item");
-deleteItem.addEventListener("click", function () {
-  myLeads.splice(myLeads, 1);
-  localStorage.setItem("myLeads", JSON.stringify(myLeads));
-  render(myLeads);
-  
-  });
+    }
 
 //Delete all saved url when delete button is double clicked.
 deleteBtn.addEventListener("dblclick", function () {
@@ -86,4 +82,4 @@ deleteBtn.addEventListener("dblclick", function () {
   myLeads = [];
   render(myLeads);
 });
-// });
+
