@@ -6,14 +6,6 @@ const deleteBtn = document.getElementById("delete-btn");
 const leadsFromLocalStorage = JSON.parse(localStorage.getItem("myLeads"));
 const tabBtn = document.getElementById("tab-btn");
 
-//Delete individual items
-const deleteItem = (i) => {
-  console.log(i);
-    myLeads.splice(i, 1);
-  localStorage.setItem("myLeads", JSON.stringify(myLeads));
-  render(myLeads);
-}
-
 //Add item from the input when saveInput button is clicked.
 inputBtn.addEventListener("click", function () {
   myLeads.push(inputEl.value);
@@ -76,10 +68,16 @@ function render(leads) {
   ulEl.innerHTML = listItems;
     }
 
+  //Delete individual items
+const deleteItem = (i) => {
+    myLeads.splice(i, 1);
+  localStorage.setItem("myLeads", JSON.stringify(myLeads));
+  render(myLeads);
+}
+
 //Delete all saved url when delete button is double clicked.
 deleteBtn.addEventListener("dblclick", function () {
   localStorage.clear();
   myLeads = [];
   render(myLeads);
 });
-
