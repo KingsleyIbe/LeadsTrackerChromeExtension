@@ -8,7 +8,7 @@ const tabBtn = document.getElementById("tab-btn");
 
 //Add item from the input when saveInput button is clicked.
 inputBtn.addEventListener("click", function () {
-  myLeads.push(inputEl.value);
+  myLeads.push({id: Date.now(), value: inputEl.value});
   inputEl.value = "";
   localStorage.setItem("myLeads", JSON.stringify(myLeads));
   render(myLeads);
@@ -34,33 +34,32 @@ function render(leads) {
   let listItems = "";
   for (let i = 0; i < leads.length; i++) {
     if (
-      leads[i].includes("@", 0) ||
-      leads[i].includes(".", 0) ||
-      leads[i].includes("www.", 0) ||
-      leads[i].includes("https", 0) ||
-      leads[i].includes("http", 0) ||
-      leads[i].includes("/", 0) ||
-      leads[i].includes(":", 0) ||
-      leads[i].includes("|", 0)
+      leads[i].value.includes("@", 0) ||
+      leads[i].value.includes(".", 0) ||
+      leads[i].value.includes("www.", 0) ||
+      leads[i].value.includes("https", 0) ||
+      leads[i].value.includes("http", 0) ||
+      leads[i].value.includes("/", 0) ||
+      leads[i].value.includes(":", 0) ||
+      leads[i].value.includes("|", 0)
     ) {
       listItems += `
       <li>
-      <button id="delete-item-btn">
-          <i class="fas fa-trash-alt" id="delete-item" onclick="deleteItem('${i}')"></i>
+      <button data-index=${leads[i].id} class="deleteItemBtn">
+          <i class="fas fa-trash-alt" id="delete-item"></i>
           </button>
-          <a target='_blank' href='${leads[i]}'>
-              ${leads[i]}
+          <a target='_blank' href='${leads[i].value}'>
+              ${leads[i].value}
           </a>
-          
       </li>
   `;
     } else {
       listItems += `
       <li>
-      <button id="delete-item-btn">
-          <i class="fas fa-trash-alt" id="delete-item" onclick="deleteItem('${i}')"></i>
+      <button data-index=${leads[i].id}  class="deleteItemBtn">
+          <i class="fas fa-trash-alt" id="delete-item"></i>
           </button>
-              ${leads[i]} 
+              ${leads[i].value} 
       </li>
   `;
     }
@@ -69,15 +68,28 @@ function render(leads) {
     }
 
   //Delete individual items
-const deleteItem = (i) => {
-    myLeads.splice(i, 1);
+// deleteItem.addEventListener ("click", function () {
+// const deleteItem = (i) => {
+const delBtn = document.querySelectorAll(".deleteItemBtn");
+delBtn.forEach(btn => btn.addEventListener("click", (e) => {
+  const index = e.target.closest("li");
+  console.log(index)
+    let leads = localStorage.getItem("myLeads");
+    leads = JSON.parse(leads);
+    // let currentLeads = leads.filter(item => item.id =! e.target.dataset.index);
+    // console.log(e.target.dataset.index)
+    ulEl.removeChild(index);
+    localStorage.setItem("myLeads", JSON.stringify(currentLeads));
+    // render(currentLeads);
   localStorage.setItem("myLeads", JSON.stringify(myLeads));
-  render(myLeads);
-}
+  // render(myLeads);
+}));
 
 //Delete all saved url when delete button is double clicked.
 deleteBtn.addEventListener("dblclick", function () {
-  localStorage.clear();
+  // console.log("double clicked")
+  localStorage.removeItem("myLeads");
   myLeads = [];
-  render(myLeads);
+  ulEl.innerHTML = "";
+  // render();
 });
