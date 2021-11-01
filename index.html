@@ -1,17 +1,18 @@
 <html>
-    <head><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.css">
+    <head>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.css">
         <link rel="stylesheet" href="index.css">
         <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css"> 
     </head>
     <body>
-        <input type="text" id="input-el" placeholder="URL or Plain text">
-        <div>
-        <button id="input-btn">SAVE INPUT</button>
-        <button id="tab-btn">SAVE TAB</button>
-        <button id="delete-btn">CLEAR ALL</button>
+    <input type="text" id="input-el" placeholder="URL or Plain text">
+    <div id='actionbox'>
+        <button id="save-btn">SAVE INPUT</button>
+        <button id="save-tab-btn">SAVE TAB</button>
+        <button id="clear-btn">CLEAR ALL</button>
     </div>
-        <ul id="ul-el">
-        </ul>
-        <script src="index.js"></script>
+        <ul id="list-container"></ul>
+        <script  type="text/javascript" src="index.js"></script>
+        <script type="text/javascript" src="ui.js"></script>
     </body>
 </html>

@@ -1,83 +1,32 @@
-let myLeads = [];
-const inputEl = document.getElementById("input-el");
-const inputBtn = document.getElementById("input-btn");
-const ulEl = document.getElementById("ul-el");
-const deleteBtn = document.getElementById("delete-btn");
-const leadsFromLocalStorage = JSON.parse(localStorage.getItem("myLeads"));
-const tabBtn = document.getElementById("tab-btn");
+class Leads{
+  constructor() {
+    this.getLeads = this.getLeads.bind(this);
+    this.saveLead = this.saveLead.bind(this);
+    this.removeLead = this.removeLead.bind(this);
+    this.clearLeads = this.clearLeads.bind(this);
+  };
 
-//Add item from the input when saveInput button is clicked.
-inputBtn.addEventListener("click", function () {
-  myLeads.push(inputEl.value);
-  inputEl.value = "";
-  localStorage.setItem("myLeads", JSON.stringify(myLeads));
-  render(myLeads);
-});
-
-//Checking if there is item in our array variable.
-if (leadsFromLocalStorage) {
-  myLeads = leadsFromLocalStorage;
-  render(myLeads);
+getLeads() {
+ return JSON.parse(localStorage.getItem('leads')) ?? [];
 }
 
-//Add the url of the current or active tabs to our array variable when saveTab button is clicked.
-tabBtn.addEventListener("click", function () {
-  chrome.tabs.query({ active: true, currentWindow: true }, function (tabs) {
-    myLeads.push(tabs[0].url);
-    localStorage.setItem("myLeads", JSON.stringify(myLeads));
-    render(myLeads);
-  });
-});
+saveLead(lead) {
+  const leads = this.getLeads();
+  leads.push(lead);
+  localStorage.setItem('leads', JSON.stringify(leads));
+}
 
-//Render url as a list link
-function render(leads) {
-  let listItems = "";
-  for (let i = 0; i < leads.length; i++) {
-    if (
-      leads[i].includes("@", 0) ||
-      leads[i].includes(".", 0) ||
-      leads[i].includes("www.", 0) ||
-      leads[i].includes("https", 0) ||
-      leads[i].includes("http", 0) ||
-      leads[i].includes("/", 0) ||
-      leads[i].includes(":", 0) ||
-      leads[i].includes("|", 0)
-    ) {
-      listItems += `
-      <li>
-      <button id="delete-item-btn">
-          <i class="fas fa-trash-alt" id="delete-item" onclick="deleteItem('${i}')"></i>
-          </button>
-          <a target='_blank' href='${leads[i]}'>
-              ${leads[i]}
-          </a>
-          
-      </li>
-  `;
-    } else {
-      listItems += `
-      <li>
-      <button id="delete-item-btn">
-          <i class="fas fa-trash-alt" id="delete-item" onclick="deleteItem('${i}')"></i>
-          </button>
-              ${leads[i]} 
-      </li>
-  `;
-    }
+  removeLead(leadId) {
+    // console.log('Lead removed...', leadId);
+    const newLeads = this.getLeads().filter(lead => lead.id !== leadId);
+    localStorage.setItem('leads', JSON.stringify(newLeads));
   }
-  ulEl.innerHTML = listItems;
-    }
 
-  //Delete individual items
-const deleteItem = (i) => {
-    myLeads.splice(i, 1);
-  localStorage.setItem("myLeads", JSON.stringify(myLeads));
-  render(myLeads);
+  clearLeads() {
+    localStorage.removeItem('leads');
+    console.log('Lead cleared.');
+  }
 }
 
-//Delete all saved url when delete button is double clicked.
-deleteBtn.addEventListener("dblclick", function () {
-  localStorage.clear();
-  myLeads = [];
-  render(myLeads);
-});
+var global = window || global;
+global.Leads = Leads
