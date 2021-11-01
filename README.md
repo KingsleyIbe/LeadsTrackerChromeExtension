@@ -3,7 +3,7 @@
 > This project is to demonstrate my knowledge in CSS, HTML and Vanilla JavaScript.
 
 ![Extension UI](project-ui.jpeg)
-![Extension Icon](icon.jpeg)
+![Extension Icon](icon.png)
 
 Leads Tracker can be used to save URL from any website.
 Build a list of targeted leads to grow your business from any website. For sites with great leads potential as LinkedIn, Leads Tracker can be a tool to save the URL for 1st, 2nd and 3rd level LinkedIn connections. 
