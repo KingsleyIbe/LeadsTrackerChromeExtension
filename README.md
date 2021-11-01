@@ -1,16 +1,52 @@
-# title(){return this.options.title||this.options.name}
+# LEADS TRACKER CHROME EXTENSION
 
-## Supporting Scrimba
+> This project is to demonstrate my knowledge in CSS, HTML and Vanilla JavaScript.
 
-Since 2017, we have created over 20 free courses on Scrimba, and we're going to
-continue launching free courses. But to pay our bills, we have to charge once
-in a while. So if you've ever wanted to "give back" to Scrimba, you can do that by buying
-	one of our paid courses
+![Extension UI](project-ui.jpeg)
+![Extension Icon](icon.jpeg)
 
-- [Become a professional React developer](https://scrimba.com/course/greact)
-- [The Responsive Web Design Bootcamp](https://scrimba.com/course/gresponsive)
-- [The Ultimate JavaScript Bootcamp](https://scrimba.com/course/gjavascript)
+Leads Tracker can be used to save URL from any website.
+Build a list of targeted leads to grow your business from any website. For sites with great leads potential as LinkedIn, Leads Tracker can be a tool to save the URL for 1st, 2nd and 3rd level LinkedIn connections. 
 
-	It would also mean the world to us if you share the courses.  
+Just visit any URL you wish to save, click on ‘save tab’ button and the URL of your current tab is saved. You can also add a description of your URL using the ‘save input’ button.
+  
+What you can do with this app:
+-	Fetch and save URL from any site.
+-	100% of the URL are saved on the Leads Tracker.
 
-Happy Coding!
+With Lead Tracker, you don’t have to worry about keeping track of important links.
+
+## Built With
+
+- HTML
+- CSS
+- JavaScript
+
+## Live Demo
+
+[Live Demo Link](https://kingsleyibe.github.io/LeadsTrackerChromeExtension/)
+
+## Download and Install Extension
+
+[Chrome Web store Link](https://chrome.google.com/webstore/detail/leads-tracker/ocokmojbnnoapdbobddbcbcbegolglfh)
+
+
+## Author
+
+- GitHub: [@githubhandle](https://github.com/kingsleyibe)
+- Twitter: [@twitterhandle](https://twitter.com/ibekingsley2)
+- LinkedIn: [LinkedIn](https://www.linkedin.com/in/kingsley-ibe-5669a5134)
+
+## 🤝 Contributing
+
+Contributions, issues, and feature requests are welcome!
+
+Feel free to check the [issues page](../../issues/).
+
+## Show your support
+
+Give a ⭐️ if you like this project! and don't forget to give a review.
+
+## 📝 License
+
+This project is [MIT](./MIT.md) licensed.
