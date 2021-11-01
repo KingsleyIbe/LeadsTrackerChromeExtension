@@ -14,7 +14,6 @@ class UI {
       const saveTabBtn = document.getElementById('save-tab-btn');
       //Add the url of the current or active tabs to our array variable when saveTab button is clicked.
       saveTabBtn.addEventListener('click', () => {
-        // let [tab] = await chrome.tabs.query({ active: true, currentWindow: true })
         const lead = { id: Date.now(), value: window.location.toString() };
         this.MyLeads.saveLead(lead);
         this.addItem(lead);
@@ -74,8 +73,6 @@ class UI {
       const leads = this.MyLeads.getLeads();
       console.log(leads);
       if (!(leads || leads.length)) return false;
-      // Use Document Fragment for render optimization
-      // const frag = new DocumentFragment();
       leads.map((lead) => this.addItem(lead));
     }
   
@@ -83,7 +80,6 @@ class UI {
       const delBtn = document.querySelectorAll('.delete-item-btn');
       delBtn.forEach((btn) =>
         btn.addEventListener('click', (e) => {
-          // console.log('remove item: ', e.target.closest('li'));
           this.MyLeads.removeLead(parseInt(e.target.closest('li').dataset.id));
           e.target.closest('li').remove();
         })
@@ -94,7 +90,6 @@ class UI {
       const clearBtn = document.querySelector('#clear-btn');
       clearBtn.addEventListener('click', () => {
         if (confirm('Are you sure you want to clear all entries?')) {
-          console.log('Clearing all lead entries...');
           this.MyLeads.clearLeads();
           document.querySelector('#list-container').innerHTML = '';
         }
